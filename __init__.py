@@ -1,6 +1,7 @@
 import pygame
 from pygame.locals import *
 from draw_maze import DrawMaze
+from maze_solver import Rodent
 
 height = 480
 width = 640
@@ -26,13 +27,15 @@ def main():
 
     # Instantiates the drawn maze object
     new_maze = DrawMaze(maze_layer, height, width)
+    new_rodent = Rodent(new_maze)
 
     screen.blit(background, (0, 0))
     pygame.display.flip()
     clock = pygame.time.Clock()
 
     while True:
-        clock.tick(120)
+
+        clock.tick(480)
 
         # Grab events from the event list and quit if necessary
         for event in pygame.event.get():
@@ -41,7 +44,9 @@ def main():
             elif event.type == KEYDOWN:
                 if event.key == K_ESCAPE:
                     return
+
         new_maze.update()
+        new_rodent.update()
 
         screen.blit(background, (0, 0))
         new_maze.draw(screen)
