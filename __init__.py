@@ -45,8 +45,11 @@ def main():
                 if event.key == K_ESCAPE:
                     return
 
-        new_maze.update()
-        new_rodent.update()
+        if new_maze.state == "create":
+            new_maze.update()
+
+        elif new_maze.state == "solve":
+            new_rodent.update()
 
         screen.blit(background, (0, 0))
         new_maze.draw(screen)
